@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Ekansh</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+	<style type="text/css">
+		body {
+			font-family: Calibri,Candara,Segoe,Segoe UI,Optima,Arial,sans-serif; 
+		}
+
+		table,
+		td,
+		th {
+			border: 1px solid;
+			text-align: left;
+		}
+
+		td,
+		th {
+			padding: 5px;
+		}
+		.button {
+			border: none;
+			color: white;
+			padding: 16px 32px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			font-size: 16px;
+			margin: 4px 2px;
+			transition-duration: 0.4s;
+			cursor: pointer;
+			top: 50%;
+  			left: 50%;
+			transform: translate(-50%, -50%);
+  			position: absolute;
+		}
+		.button4 {
+			background-color: white;
+			color: black;
+			border: 2px solid #e7e7e7;
+		}
+
+		.button4:hover {background-color: #e7e7e7;}
+
+		.overlay {
+			position: fixed;
+			width: 100%;
+			height: 100%;
+			left: 0;
+			top: 0;
+			background: rgba(51,51,51,0.7);
+			z-index: 10;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="down" class='overlay'>
+		<a class="button button4" onclick="document.getElementById('down').style.display = 'none'; this.href='data:text/html;chasTF-8,'+encodeURIComponent(document.documentElement.outerHTML)" href="#" download="report.html">Report is ready click here to download</a>
+	</div>
+	<div>
+		{% for value in myData%}
+		<div>
+			<table style="width: 100%; border-collapse: collapse;">
+				<thead>
+					<tr align="left">
+						<th style="width:20%">SL: {{loop.index}}</th>
+						<th style="width:80%" colspan="2">Host: {{ value[5] }}</th>
+					</tr>
+					<tr align="left">
+						<th colspan="3">Vulnerability Name: {{ value[0] }}</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% if value[4] == "Critical" %}
+					<tr colspan=3 bgcolor="#ff3300">
+						{% elif value[4] == "High" %}
+					<tr colspan=3 bgcolor="#ffcc00">
+						{% elif value[4] == "Medium" %}
+					<tr colspan=3 bgcolor="#ffff00">
+						{% else %}
+					<tr colspan=3 bgcolor="#33cc33">
+						{% endif %}
+						<td><b>Severity:</b> {{ value[4] }}</td>
+						<td><b>CVSS v2.0 Base:</b> {{ value[2] }}</td>
+						<td><b>CVSS v3.0 Base:</b> {{ value[3] }}</td>
+					</tr>
+					<!-- <tr>
+						<td><b>CVE</b></td>
+						<td colspan="2">{{ value[1] }}</td>
+					</tr> -->
+					<!-- <tr>
+						<td><b>Port & Protocols</b></td>
+						<td colspan="2">{{ value[6] }} {{ value[7] }}</td>
+					</tr> -->
+					<tr>
+						<td colspan="3">
+							<b>Vulnerability Description:</b><br>
+							{{ value[9] }}
+							{% if value[14] != ' ' %}
+							<br><b>POC:</b><br>
+							<table style="background-color:#c9c8c8; border:2px solid red; border-collapse: collapse; font-style:oblique;">
+								<tr>
+									<td style="border:2px solid red; border-collapse: collapse;">
+										<small>{{ value[14] }}</small>
+									</td>
+								</tr>
+							</table>
+							{% endif %}
+						</td>
+					</tr>
+					<tr>
+						<td><b>Vulnerability Impact</b></td>
+						<td colspan="2">{{ value[8] }}</td>
+					</tr>
+					<tr>
+						<td><b>Workaround, Solutions</b></td>
+						<td colspan="2">{{ value[10] }}</td>
+					</tr>
+					<tr>
+						<td><b>References (CVE-ID, CWE-ID, Bugtag-ID, etc)</b></td>
+						<td colspan="2">{{ value[1] }}<br>{{ value[11] }}</td>
+					</tr>
+					{% if value[12] != ' ' %}
+					<tr>
+						<td><b>MSKB</b></td>
+						<td colspan="2">{{ value[12] }}</td>
+						<!-- <td><b>Metasploit Exploit:</b> {{ value[13] }}</td> -->
+					</tr>
+					{% endif %}
+					<tr>
+						<td><b>Closure Remarks</b></td>
+						<td colspan="2"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div><br><br>
+		{% endfor %}
+	</div>
+</body>
+
+</html>

@@ -1,0 +1,47 @@
+{% include 'header.html' %}
+  <div class="container text-center mt-4">
+    {% with messages = get_flashed_messages()%}
+    {% if messages %}
+      {%for msg in messages %}
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Opps!! </strong>{{msg}}
+      </div>
+      {% endfor %}
+    {% endif %}
+    {% endwith %}
+    <div class="alert alert-info alert-dismissible fade show" role="alert">
+      <strong>New Feature</strong> .CSV tracker is downloaded at your download directory.
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  </div>
+  
+  
+  <br>
+  <div class="container text-center mb-3">
+    <div class="container">
+      <h3>Upload your Nessus exported CSV report</h3>
+    </div><br>
+    <div class="container w-50">
+      <form method="POST" action="dash" enctype="multipart/form-data">
+        <div class="input-group mb-3">
+          <input type="file" class="form-control" name="file" aria-describedby="inputGroupFileAddon04"
+            aria-label="Upload" accept=".csv">
+          <input type="submit" value="Submit" class="btn btn-outline-secondary">
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="container mt-5">
+    <div class="jumbotron text-center pt-5">
+      <h1 class="display-7">What we support</h1>
+      <p class="text-sm pt-4">We currently support the CSV format of Nessus (Basic Host Scan and Advanced Host Scan), this includes particular scan types which are supported by our framework</p>
+      <hr class="my-4">
+      <p class="text-sm">
+      <p>Cybersecurity organizations, bodies who are always securing the IT world for making it a better place. EKANSH brings the elemantary plaform for report creation at a initial level, for us its always been hard effort for creating trackers for report, non the less for final report. 
+        You tell us what to keep or remove meaning our platform provides a custom selection on the basis of requirement.</p>
+        <!-- <a class="btn btn-primary btn-lg" href="mailto:#" role="button">Reach US</a> -->
+      </p>
+    </div>
+  </div>
+  
+  {% include 'footer.html' %}

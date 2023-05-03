@@ -1,0 +1,142 @@
+OWASP 2021 Classification,Severity,Vulnerability,Description,Impact,URL,Remediation,References,CVSS v3,Vector,CWE
+A04 - INSECURE DESIGN,Critical,Missing Authentication (authentication bypass)- KCC,Consultant identify that kcc portal has no authentication mechanisam to authenticate user ,"Atttacker can recon the code, portal and organization to plan further attack.",https://los.uttarakhandgraminbank.com/kcc,Implement authentication mechenisam such as login/logout etc,NA,8.9,NA,CWE - 287
+A10: INSUFICIENT LOGGING & MONITORING,High,Unexpected Redirect Response Body (Too Large),"identified an unexpected redirect response body (too large).
+
+This generally indicates that after redirect the page did not finish the response as it was supposed to.","This can lead to serious issues such as authentication bypass in authentication required pages. In other pages it generally indicates a programming error.
+",https://los.uttarakhandgraminbank.com/Home/Login,"Finish the HTTP response after you redirect the user.
+In ASP.NET, use Response.Redirect(""redirected-page.aspx"", true)instead of Response.Redirect(""redirected-page.aspx"", false).
+In PHP applications, call exit()after you redirect the user.",NA,7.1,NA,CWE - 698
+A02 - CRYPTOGRAPHIC FAILURES,Medium,Weak Ciphers Enabled," weak ciphers are enabled during secure communication (SSL).
+You should allow only strong ciphers on your web server to protect secure communication with your visitors. ",Attackers might decrypt SSL traffic between your server and your visitors,https://los.uttarakhandgraminbank.com/,Configure your web server to disallow using weak ciphers.,"https://wiki.owasp.org/index.php/Insecure_Configuration_Management  
+https://www.owasp.org/index.php/Top_10-2017_A3-Sensitive_Data_Exposure 
+https://www.tripwire.com/state-of-security/vulnerability-management/zombie-poodle-goldendoodle/ 
+https://ssl-config.mozilla.org/ 
+https://syslink.pl/cipherlist/ ",5.1,NA,CWE - 326
+A05 - SECURITY MISCONFIGURATION,Medium,HTTP Strict Transport Security (HSTS) Errors and Warnings,detected errors during parsing of Strict-Transport-Security header.,"The HSTS Warning and Error may allow attackers to bypass HSTS, effectively allowing them to read and modify your communication with the website. ",https://los.uttarakhandgraminbank.com/,"Ideally, after fixing the errors and warnings, you should consider adding your domain to the the HSTS preload list. This will ensure that browsers automatically connect your website by using HTTPS, actively preventing users from visiting your site using HTTP. Since this list is hardcoded in users' browsers, it will enable HSTS even before they visit your page for the first time, eliminating the need for Trust On First Use (TOFU) with its associated risks and disadvantages. Unless you fix the errors and warnings your website won't meet the conditions required to enter the browser's preload list.","https://hstspreload.org/
+https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security#Implementation
+https://www.netsparker.com/whitepaper-http-security-headers/#HTTPStrictTransportSecurityHSTSHTTPHeader",5.5,NA,CWE - 326
+A02 - CRYPTOGRAPHIC FAILURES,Medium,The Sweet32 attack is a SSL/TLS vulnerability that allows attackers to compromise HTTPS connections using 64-bit block ciphers.,,,https://los.uttarakhandgraminbank.com/,Reconfigure the affected SSL/TLS server to disable support for obsolete 64-bit block ciphers.,https://sweet32.info/ ,5.1,NA,CWE-310
+A02 - CRYPTOGRAPHIC FAILURES,Medium,TLS 1.0 enabled,"The web server supports encryption through TLS 1.0, which was formally deprecated in March 2021 as a result of inherent security issues. In addition, TLS 1.0 is not considered to be ""strong cryptography"" as defined and required by the PCI Data Security Standard 3.2(.1) when used to protect sensitive information transferred to or from web sites. According to PCI, ""30 June 2018 is the deadline for disabling SSL/early TLS and implementing a more secure encryption protocol – TLS 1.1 or higher (TLS v1.2 is strongly encouraged) in order to meet the PCI Data Security Standard (PCI DSS) for safeguarding payment data.","An attacker may be able to exploit this problem to conduct man-in-the-middle attacks and decrypt communications between the affected service and clients.
+
+",https://los.uttarakhandgraminbank.com/,It is recommended to disable TLS 1.0 and replace it with TLS 1.2 or higher.,"https://support.cloudflare.com/hc/en-us/articles/205043158-PCI-3-1-and-TLS-1-2
+https://blog.pcisecuritystandards.org/are-you-ready-for-30-june-2018-sayin-goodbye-to-ssl-early-tls
+https://tools.ietf.org/html/rfc8996 ",5,NA,CWE - 326
+A02 - CRYPTOGRAPHIC FAILURES,Medium,TLS 1.1 enabled,"The web server supports encryption through TLS 1.1, which was formally deprecated in March 2021 as a result of inherent security issues. When aiming for Payment Card Industry (PCI) Data Security Standard (DSS) compliance, it is recommended to use TLS 1.2 or higher instead. According to PCI, ""30 June 2018 is the deadline for disabling SSL/early TLS and implementing a more secure encryption protocol – TLS 1.1 or higher (TLS v1.2 is strongly encouraged) in order to meet the PCI Data Security Standard (PCI DSS) for safeguarding payment data.",An attacker may be able to exploit this problem to conduct man-in-the-middle attacks and decrypt communications between the affected service and clients.,https://los.uttarakhandgraminbank.com/ ,It is recommended to disable TLS 1.1 and replace it with TLS 1.2 or higher.,"https://support.cloudflare.com/hc/en-us/articles/205043158-PCI-3-1-and-TLS-1-2
+https://blog.pcisecuritystandards.org/are-you-ready-for-30-june-2018-sayin-goodbye-to-ssl-early-tls
+https://tools.ietf.org/html/rfc8996 ",5,NA,CWE - 326
+A04 - INSECURE DESIGN,Medium,Internal Path Disclosure (Windows),"possible Internal Path Disclosure (Windows) in the document.
+
+","There is no direct impact, however this information can help an attacker identify other vulnerabilities or help during the exploitation of other identified vulnerabilities.",https://los.uttarakhandgraminbank.com/DNTCaptchaImage/Show?data=%2527,"Error messages should be disabled.
+Remove this kind of sensitive data from the output.
+",https://www.owasp.org/index.php/Full_Path_Disclosure,5.1,NA,CWE - 200
+A02 - CRYPTOGRAPHIC FAILURES,Low,Cookie Not Marked as Secure," identified a cookie not marked as secure, and transmitted over HTTPS.
+This means the cookie could potentially be stolen by an attacker who can successfully intercept and decrypt the traffic, or following a successful man-in-the-middle attack.","This cookie will be transmitted over a HTTP connection, therefore if this cookie is important (such as a session cookie), an attacker might intercept it and hijack a victim's session. If the attacker can carry out a man-in-the-middle attack, he/she can force the victim to make an HTTP request to steal the cookie.
+",https://los.uttarakhandgraminbank.com/,"Mark all cookies used within the application as secure.
+","http://blog.teamtreehouse.com/how-to-create-totally-secure-cookies
+https://msdn.microsoft.com/en-us/library/system.net.cookie.secure.aspx
+https://www.netsparker.com/security-cookies-whitepaper/#secureFlag",1.1,NA,CWE - 614
+A02 - CRYPTOGRAPHIC FAILURES,Low,Insecure Transportation Security Protocol Supported (TLS 1.0),"detected that insecure transportation security protocol (TLS 1.0) is supported by your web server.
+
+TLS 1.0 has several flaws. An attacker can cause connection failures and they can trigger the use of TLS 1.0 to exploit vulnerabilities like BEAST (Browser Exploit Against SSL/TLS).
+
+Websites using TLS 1.0 are considered non-compliant by PCI since 30 June 2018.",Attackers can perform man-in-the-middle attacks and observe the encryption traffic between your website and its visitors.,https://los.uttarakhandgraminbank.com/,"Configure your web server to disallow using weak ciphers. You need to restart the web server to enable changes.
+
+For Apache, adjust the SSLProtocol directive provided by the mod_ssl module. This directive can be set either at the server level or in a virtual host configuration.
+SSLProtocol +TLSv1.2
+For Nginx, locate any use of the directive ssl_protocols in the nginx.conffile and remove TLSv1.
+ssl_protocols TLSv1.2;
+For Microsoft IIS, you should make some changes on the system registry. Incorrectly editing the registry may severely damage your system. Before making changes to the registry, you should back up any valued data on your computer.
+Click on Start and then Run, type regedt32or regedit, and then click OK.
+In Registry Editor, locate the following registry key or create if it does not exist:
+HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.0\
+Locate a key named Serveror create if it doesn't exist.
+Under the Serverkey, locate a DWORD value named Enabledor create if it doesn't exist and set its value to ""0"".
+For lighttpd, put the following lines in your configuration file:
+ssl.use-sslv2 = ""disable""
+ssl.use-sslv3 = ""disable""
+ssl.openssl.ssl-conf-cmd = (""Protocol"" => ""-TLSv1.1, -TLSv1, -SSLv3"") # v1.4.48 or up
+ssl.ec-curve = ""secp384r1""","https://wiki.owasp.org/index.php/Insecure_Configuration_Management
+https://technet.microsoft.com/en-us/library/dn786418.aspx#BKMK_SchannelTR_TLS10
+https://docs.microsoft.com/en-us/windows-server/security/tls/tls-registry-settings
+https://www.nartac.com/Products/IISCrypto/
+https://support.microsoft.com/en-us/kb/187498
+https://wiki.owasp.org/index.php/Top_10-2017_A3-Sensitive_Data_Exposure",2,NA,CWE - 326
+A05 - SECURITY MISCONFIGURATION,Low,Missing X-Frame-Options Header,"detected a missing X-Frame-Optionsheader which means that this website could be at risk of a clickjacking attack.
+
+The X-Frame-OptionsHTTP header field indicates a policy that specifies whether the browser should render the transmitted resource within a frameor an iframe. Servers can declare this policy in the header of their HTTP responses to prevent clickjacking attacks, which ensures that their content is not embedded into other pages or frames.","Clickjacking is when an attacker uses multiple transparent or opaque layers to trick a user into clicking on a button or link on a framed page when they were intending to click on the top level page. Thus, the attacker is ""hijacking"" clicks meant for their page and routing them to other another page, most likely owned by another application, domain, or both.
+
+Using a similar technique, keystrokes can also be hijacked. With a carefully crafted combination of stylesheets, iframes, and text boxes, a user can be led to believe they are typing in the password to their email or bank account, but are instead typing into an invisible frame controlled by the attacker","https://los.uttarakhandgraminbank.com/(%23_memberAccess%3d@ognl.OgnlContext@DEFAULT_MEMBER_ACCESS)%3f(%23wr%3d%23context%5b%23parameters.obj%5b0%5d%5d.getWriter(),%23rs%3d@org.apache.commons.io.IOUtils@toString(@java.lang.Runtime@getRuntime().exec(%23parameters.command[0]).getInputStream()),%23wr.println(%23rs),%23wr.flush(),%23wr.close()):xx.toString.json?&obj=com.opensymphony.xwork2.dispatcher.HttpServletResponse&command=expr%20268409241%20-%2032317","Sending the proper X-Frame-Options in HTTP response headers that instruct the browser to not allow framing from other domains.
+X-Frame-Options: DENYIt completely denies to be loaded in frame/iframe.
+X-Frame-Options: SAMEORIGINIt allows only if the site which wants to load has a same origin.
+X-Frame-Options: ALLOW-FROM URLIt grants a specific URL to load itself in a iframe. However please pay attention to that, not all browsers support this.
+Employing defensive code in the UI to ensure that the current frame is the most top level window.","https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/Clickjacking_Defense_Cheat_Sheet.md
+https://www.netsparker.com/whitepaper-http-security-headers/#XFrameOptionsHTTPHeader
+http://caniuse.com/#search=X-Frame-Options
+https://owasp.org/www-community/attacks/Clickjacking",2,NA,CWE - 693
+A05 - SECURITY MISCONFIGURATION,Low,Version Disclosure (IIS),"identified a version disclosure (IIS) in the target web server's HTTP response.
+
+This information can help an attacker gain a greater understanding of the systems in use and potentially develop further attacks targeted at the specific version of IIS.",An attacker might use the disclosed information to harvest specific security vulnerabilities for the version identified.,https://los.uttarakhandgraminbank.com/%2522ns%253D%2522netsparker%25280x0000B7%2529,Configure your web server to prevent information leakage from the SERVERheader of its HTTP response.,NA,2,NA,CWE - 200
+A04 - INSECURE DESIGN,Low,Content Security Policy (CSP) not implemented,"Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks, including Cross Site Scripting (XSS) and data injection attacks.
+
+Content Security Policy (CSP) can be implemented by adding a Content-Security-Policy header. The value of this header is a string containing the policy directives describing your Content Security Policy. To implement CSP, you should define lists of allowed origins for the all of the types of resources that your site utilizes. For example, if you have a simple site that needs to load scripts, stylesheets, and images hosted locally, as well as from the jQuery library from their CDN, the CSP header could look like the following:
+
+Content-Security-Policy:
+    default-src 'self';
+    script-src 'self' https://code.jquery.com;
+
+
+It was detected that your web application doesn't implement Content Security Policy (CSP) as the CSP header is missing from the response. It's recommended to implement Content Security Policy (CSP) into your web application.
+
+","CSP can be used to prevent and/or mitigate attacks that involve content/code injection, such as cross-site scripting/XSS attacks, attacks that require embedding a malicious resource, attacks that involve malicious use of iframes, such as clickjacking attacks, and others.
+
+",https://los.uttarakhandgraminbank.com/,It's recommended to implement Content Security Policy (CSP) into your web application. Configuring Content Security Policy involves adding the Content-Security-Policy HTTP header to a web page and giving it values to control resources the user agent is allowed to load for that page,"https://hacks.mozilla.org/2016/02/implementing-content-security-policy/
+https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP",2,NA,CWE - 200
+A06 - VULNERABE AND OUTDATED COMPONENT,Low,Outdated JavaScript libraries,"You are using an outdated version of one or more JavaScript libraries. A more recent version is available. Although your version was not found to be affected by any security vulnerabilities, it is recommended to keep libraries up to date.",Consult References for more information.,https://los.uttarakhandgraminbank.com/,"Updated outdtaed Package
+Query 3.5.1
+URL: https://los.uttarakhandgraminbank.com/Home/Login
+Detection method: The library's name and version were determined based on its dynamic behavior.
+References:
+https://code.jquery.com/
+
+bootstrap.js 4.3.1
+URL: https://los.uttarakhandgraminbank.com/Home/Login
+Detection method: The library's name and version were determined based on its dynamic behavior.
+References:
+https://github.com/twbs/bootstrap/releases",NA,2.1,NA,CWE - 937
+A04 - INSECURE DESIGN,Low,Open Port identified ,"Consultant identified that so many open port are configured in server.
+
+PORT      STATE SERVICE       VERSION
+80/tcp    open  http          Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-server-header: Kestrel
+135/tcp   open  msrpc         Microsoft Windows RPC
+139/tcp   open  netbios-ssn   Microsoft Windows netbios-ssn
+443/tcp   open  ssl/http      Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-server-header: Microsoft-HTTPAPI/2.0
+445/tcp   open  microsoft-ds?
+1801/tcp  open  msmq?
+2000/tcp  open  http          Node.js Express framework
+2103/tcp  open  msrpc         Microsoft Windows RPC
+2105/tcp  open  msrpc         Microsoft Windows RPC
+2107/tcp  open  msrpc         Microsoft Windows RPC
+3389/tcp  open  ms-wbt-server Microsoft Terminal Services
+5357/tcp  open  http          Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-server-header: Microsoft-HTTPAPI/2.0
+5432/tcp  open  postgresql    PostgreSQL DB 9.6.0 or later
+5800/tcp  open  vnc-http      TightVNC (user: win-cm0gdebcbvs; VNC TCP port: 5900)
+5900/tcp  open  vnc           VNC (protocol 3.8)
+5985/tcp  open  http          Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-server-header: Microsoft-HTTPAPI/2.0
+8080/tcp  open  http          Apache httpd
+|_http-server-header: Apache
+47001/tcp open  http          Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-server-header: Microsoft-HTTPAPI/2.0
+49664/tcp open  msrpc         Microsoft Windows RPC
+49665/tcp open  msrpc         Microsoft Windows RPC
+49666/tcp open  msrpc         Microsoft Windows RPC
+49667/tcp open  msrpc         Microsoft Windows RPC
+49668/tcp open  msrpc         Microsoft Windows RPC
+49669/tcp open  msrpc         Microsoft Windows RPC
+49670/tcp open  msrpc         Microsoft Windows RPC
+49671/tcp open  msrpc         Microsoft Windows RPC
+49679/tcp open  msrpc         Microsoft Windows RPC
+58883/tcp open  msrpc         Microsoft Windows RPC",Attacker can target specific port for specific service to gain an access,https://los.uttarakhandgraminbank.com/,only enable necessary port do not enable unnecessary port in web server,NA,2.5,NA,CWE - 200

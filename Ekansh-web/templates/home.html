@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Ekansh</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+	<style type="text/css">
+		body {
+			font-family: Calibri,Candara,Segoe,Segoe UI,Optima,Arial,sans-serif; 
+		}
+
+		table,
+		td,
+		th {
+			border: 1px solid;
+			width: 100;
+			text-align: left;
+			padding: 5px;
+		}
+
+		table {
+			width: 100%;
+			border-collapse: collapse;
+		}
+		td p{
+			margin-top: 0;
+			margin-bottom: 0;
+		}
+		.button {
+			border: none;
+			color: white;
+			padding: 16px 32px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			font-size: 16px;
+			margin: 4px 2px;
+			transition-duration: 0.4s;
+			cursor: pointer;
+			top: 50%;
+  			left: 50%;
+			transform: translate(-50%, -50%);
+  			position: absolute;
+		}
+		.button4 {
+			background-color: white;
+			color: black;
+			border: 2px solid #e7e7e7;
+		}
+
+		.button4:hover {background-color: #e7e7e7;}
+
+		.overlay {
+			position: fixed;
+			width: 100%;
+			height: 100%;
+			left: 0;
+			top: 0;
+			background: rgba(51,51,51,0.7);
+			z-index: 10;
+		}
+	</style>
+</head>
+<body>
+	<div id="down" class='overlay'>
+		<a class="button button4" onclick="document.getElementById('down').style.display = 'none'; this.href='data:text/html;chasTF-8,'+encodeURIComponent(document.documentElement.outerHTML)" href="#" download="Web_report.html">Report is ready click here to download</a>
+	</div>
+	<div>
+		{% for value in myData%}
+		<div>
+			<table>
+				<thead>
+					<tr>
+						<th style="width:20%">SL: {{loop.index}}</th>
+						<th colspan="2">Host/URL: {{ value[5] }}</th>
+					</tr>
+					<tr>
+						<th colspan="3">Vulnerability Name: {{value[2]}}</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% if value[1] == "Critical" %}
+					<tr bgcolor="#ff3300">
+						{% elif value[1] == "High" %}
+					<tr bgcolor="#ffcc00">
+						{% elif value[1] == "Medium" %}
+					<tr bgcolor="#ffff00">
+						{% else %}
+					<tr bgcolor="#33cc33">
+						{% endif %}
+						<td><b>Severity: {{ value[1] }}</b></td>
+						<td colspan="2"><b>
+							Classification: {{ value[0] }}<br>
+							CVSS v3.0 Base: {{ value[8] }}, 
+							CWE/CVE: {{ value[10] }}
+						</b></td>
+					</tr>
+					<tr>
+						<td colspan="3">
+							<p><b>Vulnerability Description:</b><br>
+							{{ value[3] }}</p>
+						</td>
+					</tr>
+					<tr>
+						<td><b>Vulnerability Impact</b></td>
+						<td colspan="2"><p>{{value[4]}}</p></td>
+					</tr>
+					<tr>
+						<td><b>Recommendation</b></td>
+						<td colspan="2"><p>{{value[6]}}</p></td>
+					</tr>
+					<tr>
+						<td><b>Reference</b></td>
+						<td colspan="2">{{ value[7] }}</td>
+					</tr>
+					<tr>
+						<td><b>Closure Remarks</b></td>
+						<td colspan="2"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div><br><br>
+		{% endfor %}
+	</div>
+</body>
+
+</html>

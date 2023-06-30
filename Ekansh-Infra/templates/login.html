@@ -20,20 +20,30 @@ height: 100%;
     <div class="container-fluid h-custom">
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col-md-9 col-lg-6 col-xl-5">
-          <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
-            class="img-fluid" alt="Sample image">
+          <img src="https://iili.io/Hio4RI9.md.png" class="img-fluid" alt="login image">
         </div>
         <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+          <div class="container text-center mt-4">
+            {% with messages = get_flashed_messages()%}
+            {% if messages %}
+              {%for msg in messages %}
+              <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Opps!! </strong>{{msg}}
+              </div>
+              {% endfor %}
+            {% endif %}
+            {% endwith %}
+          </div>
           <form  method="POST" action="">  
             {{form.hidden_tag()}}
             <div class="form-outline mb-4">
-            {{form.username(class="form-control form-control-lg")}}
+            {{form.username(class="form-control")}}
             </div>
             <div class="form-outline mb-3">
-                {{form.password(class="form-control form-control-lg", id="form3Example4")}}
+            {{form.password(class="form-control", id="form3Example4")}}
             </div>  
             <div class="text-center text-lg-start mt-4 pt-2">
-                {{form.submit(class="btn btn-primary btn-lg", style="padding-left: 2.5rem; padding-right: 2.5rem;")}}                
+                {{form.submit(class="btn btn-outline-primary", style="padding-left: 2.5rem; padding-right: 2.5rem;")}}                
               <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="{{url_for('registration')}}"
                   class="link-danger">Register</a></p>
             </div>

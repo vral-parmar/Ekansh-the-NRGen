@@ -71,10 +71,10 @@ def uploadFiles():
             return redirect(url_for('report'))
         else:
             flash('File is not supported', 'error')
-            return redirect(url_for('dash'))
+            return redirect(url_for('dashbord'))
     except Exception as e:
         flash("Upload Failure", "error")
-        redirect(url_for("dash"))
+        return redirect(url_for("dashbord"))
 
 @app.route('/report')
 @login_required
@@ -129,7 +129,7 @@ def report():
         unique_df = unique_df.fillna(' ')
         myData = unique_df.values
         #add username here for excel tracker
-        unique_df.to_csv('C:/Users/ParmarK/Downloads/report.csv')
+        unique_df.to_csv('/home/kali/Downloads/report.csv')
         return render_template('report.html', myData=myData)
     except Exception as e:
         flash("Please upload CSV file again", "error")

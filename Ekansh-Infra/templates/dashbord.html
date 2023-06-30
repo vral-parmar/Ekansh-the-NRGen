@@ -1,4 +1,15 @@
 {% include 'header.html' %}
+<div class="container mt-5">
+  <div class="jumbotron pt-5">
+    <h1 class="display-7">What we support</h1>
+    <hr class="my-4">
+    <p class="text-sm">
+    <p>Cybersecurity organizations, bodies who are always securing the IT world for making it a better place. EKANSH brings the elemantary plaform for report creation at a initial level, for us its always been hard effort for creating trackers for report, non the less for final report. 
+      You tell us what to keep or remove meaning our platform provides a custom selection on the basis of requirement. Whether you're managing your next big project or digitalizing task management for your team's daily business, Ekansh helps you generate report in a beautiful, customizable environment that perfectly adapts to your needs.
+    </p>
+    </p>
+  </div>
+</div>
   <div class="container text-center mt-4">
     {% with messages = get_flashed_messages()%}
     {% if messages %}
@@ -9,39 +20,52 @@
       {% endfor %}
     {% endif %}
     {% endwith %}
-    <div class="alert alert-info alert-dismissible fade show" role="alert">
-      <strong>New Feature</strong> .CSV tracker is downloaded at your download directory.
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
   </div>
   
   
   <br>
-  <div class="container text-center mb-3">
-    <div class="container">
-      <h3>Upload your Nessus exported CSV report</h3>
-    </div><br>
-    <div class="container w-50">
-      <form method="POST" action="dash" enctype="multipart/form-data">
-        <div class="input-group mb-3">
-          <input type="file" class="form-control" name="file" aria-describedby="inputGroupFileAddon04"
-            aria-label="Upload" accept=".csv">
-          <input type="submit" value="Submit" class="btn btn-outline-secondary">
+  <div class="container mb-3">
+      <div class="row">
+        <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+            <h3>Upload your Nessus exported CSV report</h3><br>
+          <div class="container">
+            <form method="POST" action="dash" enctype="multipart/form-data">
+              <div class="input-group mb-3">
+                <input type="file" class="form-control" name="file" aria-describedby="inputGroupFileAddon04"
+                  aria-label="Upload" accept=".csv">
+                <input type="submit" value="Submit" class="btn btn-outline-secondary">
+              </div>
+            </form>
+          </div><br>
+          <div class="container">
+            <p><b>Dont make any changes in nessus exported .csv file that may cause issue in Report just give exported .csv to tool it will handle all the duplication, merge samiler vulnerability and generate the report accordingly.</b><br></p>
+            <p>
+Please choose proper .CSV file that has a following columns:
+Plugin ID, CVE, CVSS v2.0 Base Score  , Risk, Host, Protocol, Port, Name, Synopsis, Description, Solution, See Also, Plugin Output, STIG Severity, CVSS v3.0 Base Score, CVSS v2.0 Temporal Score, CVSS v3.0 Temporal Score, Risk Factor, BID, XREF, MSKB, Plugin Publication Date, Plugin Modification Date, Metasploit, Core Impact, CANVAS.
+</p>
+          </div>
         </div>
-      </form>
+        <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+          <h3>Changelog</h3><br>
+          <div class="container">
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+              Please set Download path according to your System in app.py
+            </div>
+            <div class="alert alert-info alert-dismissible fade show" role="alert">
+              <ol>
+                <li>Enhacned Exception handler</li>
+                <li>Excel tracker can be found in Download Directory</li>
+                <li>Login and registration module is included</li>
+                <li>System performance enhanced</li>
+                <li>In table POC is encluded</li>
+                <li>Report can be download in one click</li>
+                <li>System removed duplicate entries and merge CVEs</li>
+                <li>Enhanced UI</li>
+                <li>New updated Templated added</li>
+              </ol> 
+            </div>
+          </div>
+        </div>
     </div>
-  </div>
-  <div class="container mt-5">
-    <div class="jumbotron text-center pt-5">
-      <h1 class="display-7">What we support</h1>
-      <p class="text-sm pt-4">We currently support the CSV format of Nessus (Basic Host Scan and Advanced Host Scan), this includes particular scan types which are supported by our framework</p>
-      <hr class="my-4">
-      <p class="text-sm">
-      <p>Cybersecurity organizations, bodies who are always securing the IT world for making it a better place. EKANSH brings the elemantary plaform for report creation at a initial level, for us its always been hard effort for creating trackers for report, non the less for final report. 
-        You tell us what to keep or remove meaning our platform provides a custom selection on the basis of requirement.</p>
-        <!-- <a class="btn btn-primary btn-lg" href="mailto:#" role="button">Reach US</a> -->
-      </p>
-    </div>
-  </div>
-  
+  </div>  
   {% include 'footer.html' %}

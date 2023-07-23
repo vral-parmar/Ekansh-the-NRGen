@@ -32,6 +32,21 @@
                     <a class="nav-link active" aria-current="page" href="{{url_for('home')}}">Home</a>
                 </li>
             </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" data-bs-toggle="modal" data-bs-target="#changelogModal">Changelog</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" data-bs-toggle="modal" data-bs-target="#readmeModal">Readme</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" data-bs-toggle="modal" data-bs-target="#aboutModal">About me</a>
+                </li>
+            </ul>
             <ul class="navbar-nav" style="margin-left: auto;">
                 <li class="nav-item">
                     <span class="nav-link active" aria-current="page">
@@ -46,3 +61,93 @@
         </div>
     </div>
 </nav>
+<!-- Changelog Modal -->
+<div class="modal fade" id="changelogModal" tabindex="-1" aria-labelledby="changelogModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Changelog</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+            <h6><b>We are working on tool to make more in use.</b>  </h6>
+              <ul>
+                <li>Enhacned Exception handler</li>
+                <li>Excel tracker can be found in Download Directory</li>
+                <li>Login and registration module is included</li>
+                <li>System performance enhanced</li>
+                <li>In table POC is encluded</li>
+                <li>Report can be download in one click</li>
+                <li>System removed duplicate entries and merge CVEs</li>
+                <li>Enhanced UI</li>
+                <li>New updated Templated added</li>
+                <li>Enhanced UI</li>
+              </ul> 
+            </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- About Modal -->
+<div class="modal fade" id="aboutModal" tabindex="-1" aria-labelledby="aboutModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">About me</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="container text-center">
+                        <img class="rounded mx-auto d-block img-fluid" src="https://vral-parmar.github.io/vral_parmar/img/Viral.jpeg" alt="photo is here">
+                    </div>
+                </div>
+                <div class="col">
+                    <h5 class="text-uppercase">Viral Parmar</h5>
+          <p>I'm a  Cyber Security Expert with expertise in Penetration Testing, Network Pen Testing, Web Application Development, Application Testing, Source Code Audit, and Red Team Support. With over three years of experience, I have a proven track record in identifying vulnerabilities, conducting comprehensive tests, and providing actionable recommendations to enhance security. My passion for continuous learning and staying updated on emerging threats allows me to deliver effective solutions that protect organizations' digital assets.</p>
+          <p>Have any Suggestion ?</p>
+          <a href="mailto:parmarviral93@gmail.com" type="button" class="btn btn-dark">Reach me</a>
+          <a href="https://vral-parmar.github.io/vral_parmar/" type="button" class="btn btn-dark">Github</a>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Instructions Modal -->
+<div class="modal fade" id="readmeModal" tabindex="-1" aria-labelledby="aboutModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Readme</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+            <h2>We make reporting easy</h2>
+            <p>
+                Cybersecurity organizations, bodies who are always securing the IT world for making it a better place. EKANSH brings the elemantary plaform for report creation at a initial level, for us its always been hard effort for creating trackers for report, non the less for final report. 
+      You tell us what to keep or remove meaning our platform provides a custom selection on the basis of requirement. Whether you're managing your next big project or digitalizing task management for your team's daily business, Ekansh helps you generate report in a beautiful, customizable environment that perfectly adapts to your needs.
+            </p>
+        </div><br>
+        <div class="container">
+            <p>
+                Please choose proper .CSV file that has a following columns:
+                Plugin ID, CVE, CVSS v2.0 Base Score  , Risk, Host, Protocol, Port, Name, Synopsis, Description, Solution, See Also, Plugin Output, STIG Severity, CVSS v3.0 Base Score, CVSS v2.0 Temporal Score, CVSS v3.0 Temporal Score, Risk Factor, BID, XREF, MSKB, Plugin Publication Date, Plugin Modification Date, Metasploit, Core Impact, CANVAS.
+            </p>
+          </div>
+          <div class="container alert alert-danger">
+            <p><b>Dont make any changes in nessus exported .csv file that may cause issue in Report just give exported .csv to tool it will handle all the duplication, merge samiler vulnerability and generate the report accordingly.</b><br></p>
+        </div>
+           <div class="container text-center">
+              <h5 class="text-uppercase">how tool work?</h5><br>
+              <img src="https://iili.io/Hio8y91.md.png" alt="process is here">
+            </div>
+      </div>
+    </div>
+  </div>
+</div>

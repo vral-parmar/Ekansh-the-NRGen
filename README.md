@@ -1,5 +1,6 @@
-# Ekansh-P
-## Nessus CSV to Report Generator 
+# Nessus CSV to HTML Generator 
 
-- install following 
-flask, pandas
+This simple Python-Flask-based tool helps cyber security auditors generate a report and tracker at their fingertips.
+
+Install the following before using Ekansh
+> pip install flask, pandas, flask_sqlalchemy, flask_login, flask_wtf, wtforms, flask_bcrypt, numpy

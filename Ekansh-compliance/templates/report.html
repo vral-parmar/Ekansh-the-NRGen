@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Ekansh</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+	<style type="text/css">
+		body {
+			font-family: Calibri, Candara, Segoe, Segoe UI, Optima, Arial, sans-serif;
+		}
+
+		.button {
+			border: none;
+			color: white;
+			padding: 16px 32px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			font-size: 16px;
+			margin: 4px 2px;
+			transition-duration: 0.4s;
+			cursor: pointer;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			position: absolute;
+		}
+
+		.button4 {
+			background-color: white;
+			color: black;
+			border: 2px solid #e7e7e7;
+		}
+
+		.button4:hover {
+			background-color: #e7e7e7;
+		}
+
+		.overlay {
+			position: fixed;
+			width: 100%;
+			height: 100%;
+			left: 0;
+			top: 0;
+			background: rgba(51, 51, 51, 0.7);
+			z-index: 10;
+		}
+
+		.formatted-text {
+			white-space: pre-line;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="down" class='overlay'>
+		<a class="button button4"
+			onclick="document.getElementById('down').style.display = 'none'; this.href='data:text/html;chasTF-8,'+encodeURIComponent(document.documentElement.outerHTML)"
+			href="#" download="report.htm">Report is ready click here to download</a>
+	</div>
+	<div>
+		{% for value in myData%}
+		<div>
+			<table style="width: 100%; border-collapse: collapse; border: 1px; border-style: solid">
+				<thead>
+					<tr align="left">
+						<th align="left" style="width:20%; padding: 7px; border: 1px; border-style: solid">SL:
+							{{loop.index}}</th>
+						<th align="left" style="width:80%; padding: 7px;border: 1px; border-style: solid">Host: {{
+							value[1] }}</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% if value[0] == "FAILED" %}
+					<tr bgcolor="#ff3300">
+						{% elif value[0] == "WARNING" %}
+					<tr bgcolor="#ffcc00">
+						{% else %}
+					<tr bgcolor="#33cc33">
+						{% endif %}
+						<td colspan="2" style="padding: 7px; border: 1px; border-style: solid"><b>Compliance: {{
+								value[0] }}</b></td>
+					</tr>
+					<tr>
+						<td colspan="2"
+							style="white-space: pre-line; padding:5px; max-width: 200px; overflow: hidden; word-wrap: break-word;">
+							<div>{{ value[6] | safe }}</div>
+							<br>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div><br><br>
+		{% endfor %}
+	</div>
+</body>
+
+</html>

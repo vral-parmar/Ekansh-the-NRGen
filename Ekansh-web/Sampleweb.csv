@@ -1,0 +1,209 @@
+OWASP 2021 Classification,Severity,Vulnerability,Description,Impact,URL,Remediation,References,CVSS v3,Vector,CWE
+A01: Broken Access Control,High,Default server page identified,Consultant identify default tomcat page is identify on server.," It is possible to persuade a naive user to supply sensitive information such as username, password, credit card number, social security number etc.
+and attacker can identiy server version and service runnig on.",https://asba.capitalbankuat.in/docs/*,Remove how to or Documentation pages because an attacker can gather server related recon from it.,NA,8.2,CVSS:3.1/AV:M/AC:L/PR:H/UI:R/S:C/C:L/I:M/A:H,CWE - 601
+A01: Broken Access Control,High,Client-side desync,"The server appears to be vulnerable to client-side desync attacks. A POST request was sent to the path '/ipo-onnet-csfb/polyfills.9a58e423926675bb.js' with a second request sent as the body. The server ignored the Content-Length header and did not close the connection, leading to the smuggled request being interpreted as the next request.","Client-side desync (CSD) vulnerabilities occur when a web server fails to correctly process the Content-Length of POST requests. By exploiting this behavior, an attacker can force a victim's browser to desynchronize its connection with the website",https://asba.capitalbankuat.in/ipo-onnet-csfb/polyfills.9a58e423926675bb.js,"You can resolve this vulnerability by patching the server so that it either processes POST requests correctly, or closes the connection after handling them. You could also disable connection reuse entirely, but this may reduce performance. You can also resolve this issue by enabling HTTP/2.","https://portswigger.net/web-security/request-smuggling
+https://portswigger.net/research/browser-powered-desync-attacks",8.5,CVSS:3.1/AV:M/AC:L/PR:H/UI:R/S:C/C:M/I:M/A:H,CWE - 444
+A01: Broken Access Control,Medium,Access-Control-Allow-Origin header with wildcard (*) value,"Cross-origin resource sharing (CORS) is a mechanism that allows restricted resources (e.g. fonts) on a web page to be requested from another domain outside the domain from which the resource originated. The Access-Control-Allow-Origin header indicates whether a resource can be shared based on the value of the Origin request header, ""*"", or ""null"" in the response.
+
+If a website responds with Access-Control-Allow-Origin: * the requested resource allows sharing with every origin. Therefore, any website can make XHR (XMLHTTPRequest) requests to the site and access the responses.",Any website can make XHR requests to the site and access the responses,https://asba.capitalbankuat.in/login.jsp,Check whether Access-Control-Allow-Origin: * is appropriate for the resource/response.,"https://portswigger.net/research/exploiting-cors-misconfigurations-for-bitcoins-and-bounties
+https://www.acunetix.com/blog/web-security-zone/cross-origin-resource-sharing-cors-access-control-allow-origin-header/
+https://code.google.com/p/html5security/wiki/CrossOriginRequestSecurity
+http://www.w3.org/TR/cors/
+https://www.owasp.org/index.php/Test_Cross_Origin_Resource_Sharing_(OTG-CLIENT-007)",5,CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:C/C:N/I:N/A:N,CWE-284
+A02: Cryptographic Failures,Medium,Application error messages,"We found one or more error/warning messages. Application error or warning messages may expose sensitive information about an application's internal workings to an attacker.
+While information disclosure vulnerabilities are not directly exploitable by an attacker, they may help an attacker to learn about system specific information. The following is a list of some of the information an attacker may be able to obtain from application error disclosure.
+Internal IP addresses
+Secrets (passwords, keys, tokens...)
+Operating system distributions
+Software version numbers
+Missing security patches
+Application stack traces
+SQL statements
+Location of sensitive files (backups, temporary files...)
+Location of sensitive resources (databases, caches, code repositories...)
+These messages may also contain the location of the file that produced an unhandled exception.
+Consult the 'Attack details' section for more information about the affected page(s).",Error messages may disclose sensitive information which can be used to escalate attacks.,https://asba.capitalbankuat.in/ipo-onnet-csfb/index?tokenNo[]=rQgmUeLC4Xd/J0MMdD4uog==&username=/yc21Zizr4TBj8h2Mt4GIw==,Verify that these page(s) are disclosing error or warning messages and properly configure the application to log errors to a file instead of displaying the error to the user.,"https://www.owasp.org/index.php/Improper_Error_Handling
+https://www.php.net/manual/en/errorfunc.configuration.php#ini.display-errors",5.3,CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N,CWE - 209
+A04: Insecure Design,Medium, Cookie with Insecure or Improper or Missing SameSite attribute,Sensitive Cookie with Improper or Insecure or Missing SameSite Attribute,"Prevent Cookie information leakage by restricting cookies to first-party or same-site context
+Attacks can extend to Cross-Site-Request-Forgery (CSRF) attacks if there are no additional protections in place (such as Anti-CSRF tokens).
+The SameSite attribute controls how cookies are sent for cross-domain requests.
+The attribute may have three values: 'Lax', 'Strict', or 'None'. If 'None' is used, a website may create a cross-domain POST HTTP request to another website, and the browser automatically adds cookies to this request.
+This may lead to Cross-Site-Request-Forgery (CSRF) attacks if there are no additional protections in place (such as Anti-CSRF tokens).
+Modes and their uses:
+'Lax' mode: the cookie will only be sent with a top-level get request.
+'Strict' mode; the cookie will not be sent with any cross-site usage even if the user follows a link to another website.
+'None' mode: the cookie will be sent with the cross-site requests.
+The attribute having: 'Lax' or 'None' must have 'Secure' Flag set and must be transferred over https.
+Example - Set-Cookie: key=value; SameSite=Lax;Secure
+Setting attribute to 'Strict' is the recommended option.
+Example - Set-Cookie: key=value; SameSite=Strict", https://asba.capitalbankuat.in/,"[1] Review possible solutions for configuring SameSite Cookie attribute to recommended values.
+[2] Restrict Cookies to a first-party or same-site context.
+[3] Verify and set the SameSite attribute of your cookie to Strict, to ensure that the cookie will only be sent in a first-party context.
+[4] Or, if you want to relax the restrictions of first-party context, then verify and set the SameSite attribute of the cookie to Lax with Secure Flag enabled and transferred over HTTPS.","http://www.webappsec.org/projects/threat/classes/information_leakage.shtml
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie/SameSite",4.7,CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:L,CWE - 1275
+A04: Insecure Design,Medium,SHA-1 cipher suites were detected ,"It may be possible to steal or manipulate customer session and cookies, which might be used to impersonate a legitimate user, allowing the hacker to view or alter user records, and to perform transactions as that user
+The server supports SHA-1 ciphersuites.
+SHA-1 was officially deprecated by NIST in 2011, but many applications still rely on it.
+Up until now (2021), only theoretical attacks have been known agsinst SHA-1, which is why many applications still rely on it.
+Recently, a practical attack was introduced by CWI Amsterdam and Google Research teams ( [1] and [2] ).","It may be possible to steal or manipulate customer session and cookies, which might be used to impersonate a legitimate user, allowing the hacker to view or alter user records, and to perform transactions as that user",https://asba.capitalbankuat.in/ipo-onnet-csfb/index,Use Secure Cipher-Suites best practices,"https://docs.microsoft.com/en-us/power-platform/admin/server-cipher-tls-requirements
+https://cheatsheetseries.owasp.org/cheatsheets/Transport_Layer_Protection_Cheat_Sheet.html#use-strong-cryptographic-hashing-algorithms",5.3,CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N,CWE - 327
+A06: Vulerable and outdated component,Medium,Out-of-date Version (Tomcat),Consultant identified you are using an out-of-date version of Tomcat.,"Apache Tomcat Unprotected Transport of Credentials Vulnerability
+When using the RemoteIpFilter with requests received from a reverse proxy via HTTP that include the X-Forwarded-Proto header set to https, session cookies created by Apache Tomcat 11.0.0-M1 to 11.0.0.-M2, 10.1.0-M1 to 10.1.5, 9.0.0-M1 to 9.0.71 and 8.5.0 to 8.5.85 did not include the secure attribute. This could result in the user agent transmitting the session cookie over an insecure channel.",https://asba.capitalbankuat.in/*,"Please upgrade your installation of Tomcat to the latest stable version.
+Identified Version
+9.0.69
+Latest Version
+9.0.76 (in this branch)
+Overall Latest Version
+10.1.10
+Vulnerability Database
+Result is based on 06/19/2023 20:30:00 vulnerability database content.",https://tomcat.apache.org/whichversion.html,5.5,CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:L/I:N/A:N,"CWE - 1035, 937"
+A04: Insecure Design,Medium,Session token in URL,"The URL in the request appears to contain a session token within the query string:
+https://asba.capitalbankuat.in/ipo-onnet-csfb/index?username=FDkaJpnOC4BXftQP9kgCxQ==&tokenNo=BDehmv4InFVHa8DplwxUhQ==","Sensitive information within URLs may be logged in various locations, including the user's browser, the web server, and any forward or reverse proxy servers between the two endpoints. URLs may also be displayed on-screen, bookmarked or emailed around by users. They may be disclosed to third parties via the Referer header when any off-site links are followed. Placing session tokens into the URL increases the risk that they will be captured by an attacker.",https://asba.capitalbankuat.in/ipo-onnet-csfb/*,"Applications should use an alternative mechanism for transmitting session tokens, such as HTTP cookies or hidden fields in forms that are submitted using the POST method.","https://cwe.mitre.org/data/definitions/598.html
+https://cwe.mitre.org/data/definitions/384.html
+https://cwe.mitre.org/data/definitions/200.html",5,CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:C/C:N/I:N/A:L,CWE - 200
+A04: Insecure Design,Low,Content Security Policy (CSP) not implemented,"Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks, including Cross Site Scripting (XSS) and data injection attacks.
+
+Content Security Policy (CSP) can be implemented by adding a Content-Security-Policy header. The value of this header is a string containing the policy directives describing your Content Security Policy. To implement CSP, you should define lists of allowed origins for the all of the types of resources that your site utilizes. For example, if you have a simple site that needs to load scripts, stylesheets, and images hosted locally, as well as from the jQuery library from their CDN, the CSP header could look like the following:
+
+Content-Security-Policy:
+    default-src 'self';
+    script-src 'self' https://code.jquery.com;","CSP can be used to prevent and/or mitigate attacks that involve content/code injection, such as cross-site scripting/XSS attacks, attacks that require embedding a malicious resource, attacks that involve malicious use of iframes, such as clickjacking attacks, and others.",https://asba.capitalbankuat.in/*,It's recommended to implement Content Security Policy (CSP) into your web application. Configuring Content Security Policy involves adding the Content-Security-Policy HTTP header to a web page and giving it values to control resources the user agent is allowed to load for that page,"https://hacks.mozilla.org/2016/02/implementing-content-security-policy/
+https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP",2,CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:N/I:N/A:N,CWE - 1021
+A04: Insecure Design,Low,Permissions-Policy header not implemented,The Permissions-Policy header allows developers to selectively enable and disable use of various browser features and APIs.,The Permissions-Policy header allows a website to specific which features of the web browser should be permitted to function its also help you to limit attack surface area for an attacker.,https://asba.capitalbankuat.in/*,Implement permission policy header.,"https://www.w3.org/TR/permissions-policy-1/
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Feature-Policy",2,CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:N/I:N/A:N,CWE - 1021
+A04: Insecure Design,Low,Unnecessary Http Response Headers found in the Application ,"The response contains unnecessary headers, which may help attackers in planning further attacks.","It is possible to gather sensitive information about the web server type, version, OS and more.
+AppScan detected a Http response header that is unnecessary.
+For reasons of security and privacy, The Http response headers like ""Server"", ""X-Powered-By"", ""X-AspNetMvc-Version"" and ""X-AspNet-Version"" should not appear in web pages.
+The ""Server"" header is a header that is added usually by default whenever a response is sent to the client by the server.
+These added header(s) may reveal sensitive information about the internal server software version and type, thus enabling attackers to fingerprint it and attack it with targeted exploits. Moreover, when a new exploit becomes known to the public, the server will most likely get attacked with it.", https://asba.capitalbankuat.in/ipo-onnet-csfb/index,"Configure your server to remove the default ""Server"" header from being sent to all outgoing requests.
+For IIS, see:
+https://techcommunity.microsoft.com/t5/iis-support-blog/remove-unwanted-http-response-headers/ba-p/369710
+For nginx, see:
+https://www.getpagespeed.com/server-setup/nginx/how-to-remove-the-server-header-in-nginx
+For Weblogic, see:
+https://docs.oracle.com/cd/E13222_01/wls/docs81/adminguide/web_server.html
+For Apache, see:
+https://techglimpse.com/set-modify-response-headers-http-tip/","https://www.hacksplaining.com/prevention/information-leakage
+http://projects.webappsec.org/w/page/13246925/Fingerprinting",2,CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:N/I:N/A:N,CWE - 200
+A01: Broken Access Control,Low,Application Test Script Detected  ,"It is possible to download temporary script files, which can expose the application logic and other sensitive information such as usernames and passwords
+A common user can access certain pages on a site through simple surfing (i.e. following web links). However, there might be pages and scripts that are not accessible through simple surfing, (i.e. pages and scripts that are not linked).
+An attacker may be able to access these pages by guessing their name, e.g. test.php, test.asp, test.cgi, test.html, etc.
+Example request for a script named ""test.php"":
+http://[SERVER]/test.php
+Sometimes developers forget to remove certain debugging or test pages from production environments. These pages may include sensitive information that should not be accessed by web users. They may also be vulnerable and/or help an attacker gain information about the server that will help leverage an attack.
+Sample Exploit:
+http://[SERVER]/test.php
+http://[SERVER]/test.asp
+http://[SERVER]/test.aspx
+http://[SERVER]/test.html
+http://[SERVER]/test.cfm
+http://[SERVER]/test.cgi",Temporary files were left in the environment,https://asba.capitalbankuat.in/ipo-onnet-csfb/test.jsp,"Do not leave test/temporary scripts on the server and avoid doing so in the future.
+Make sure there are no other scripts on the server that are not essential for its normal operation.",na,2,CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:N/I:N/A:N,CWE - 531
+A04: Insecure Design,Low,Version Disclosure (Tomcat),"Consultant  identified a version disclosure (Tomcat) in the target web server's HTTP response.
+This information can help an attacker gain a greater understanding of the systems in use and potentially develop further attacks targeted at the specific version of Tomcat.","An attacker might use the disclosed information to harvest specific security vulnerabilities for the version identified.
+",https://asba.capitalbankuat.in/(268409241-55107),Configure your web server to prevent information leakage from the X-Powered-Byheader of its HTTP response.,https://wiki.owasp.org/index.php/Securing_tomcat,2,CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:N/I:N/A:N,CWE - 205
+A04: Insecure Design,Low,Frameable response (potential Clickjacking),"If a page fails to set an appropriate X-Frame-Options or Content-Security-Policy HTTP header, it might be possible for a page controlled by an attacker to load it within an iframe. This may enable a clickjacking attack, in which the attacker's page overlays the target application's interface with a different interface provided by the attacker. By inducing victim users to perform actions such as mouse clicks and keystrokes, the attacker can cause them to unwittingly carry out actions within the application that is being targeted. This technique allows the attacker to circumvent defenses against cross-site request forgery, and may result in unauthorized actions.","The response contains an X-Frame-Options header with an unexpected value. Browsers will ignore this header and allow the response to be framed, that allow attacker to plan further attack.",https://asba.capitalbankuat.in/ipo-onnet-csfb/*,"To effectively prevent framing attacks, the application should return a response header with the name X-Frame-Options and the value DENY to prevent framing altogether, or the value SAMEORIGIN to allow framing only by pages on the same origin as the response itself. Note that the SAMEORIGIN header can be partially bypassed if the application itself can be made to frame untrusted websites.","https://developer.mozilla.org/en-US/docs/Web/HTTP/X-Frame-Options
+https://portswigger.net/web-security/clickjacking",2,CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:N/I:N/A:N,CWE - 200
+A04: Insecure Design,Low,Console Log Debug Information Exposure,"This vulnerability occurs when a web application or software system outputs sensitive debug information to the browser's console log. Debug information typically includes sensitive data such as database queries, API keys, passwords, or other internal system details that should not be exposed to end-users or potential attackers.",The exposure of debug information through the console log can have several negative consequences.,https://asba.capitalbankuat.in/ipo-onnet-csfb/*,In production environment please diable Console log information.,NA,2,CVSS:3.1/AV:N/AC:I/PR:N/UI:R/S:C/C:N/I:N/A:N,CWE - 489
+A04: Insecure Design,Medium,Session token in URL,"The URL in the request appears to contain a session token within the query string:
+https://asba.capitalbankuat.in/ipo-onnet-csfb/index?username=FDkaJpnOC4BXftQP9kgCxQ==&tokenNo=BDehmv4InFVHa8DplwxUhQ==","Sensitive information within URLs may be logged in various locations, including the user's browser, the web server, and any forward or reverse proxy servers between the two endpoints. URLs may also be displayed on-screen, bookmarked or emailed around by users. They may be disclosed to third parties via the Referer header when any off-site links are followed. Placing session tokens into the URL increases the risk that they will be captured by an attacker.",http://172.31.0.32:8080/ipocsfb-web/index?token=16884569455076Ky (token),"Applications should use an alternative mechanism for transmitting session tokens, such as HTTP cookies or hidden fields in forms that are submitted using the POST method.","https://cwe.mitre.org/data/definitions/598.html
+https://cwe.mitre.org/data/definitions/384.html
+https://cwe.mitre.org/data/definitions/200.html",5.3,CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:C/C:N/I:N/A:L,CWE - 200
+A04: Insecure Design,Medium, Cookie with Insecure or Improper or Missing SameSite attribute,"Sensitive Cookie with Improper or Insecure or Missing SameSite Attribute
+List of cookies with missing, inconsistent or contradictory properties:
+http://172.31.0.32:8080/ipocsfb-web/authentication
+
+Cookie was set with:
+Set-Cookie: JSESSIONID=A319FB041739AC68C0B077359E76D606; Path=/ipocsfb-web; HttpOnly
+
+This cookie has the following issues:
+ - Cookie without SameSite attribute.
+When cookies lack the SameSite attribute, Web browsers may apply different and sometimes unexpected defaults. It is therefore recommended to add a SameSite attribute with an appropriate value of either ""Strict"", ""Lax"", or ""None"".
+
+http://172.31.0.32:8080/ipocsfb-web/authentication
+
+Cookie was set with:
+Set-Cookie: JSESSIONID=3DE0771A9D39B62B4D6A5580625AE81B; Path=/ipocsfb-web; HttpOnly
+
+This cookie has the following issues:
+ - Cookie without SameSite attribute.
+When cookies lack the SameSite attribute, Web browsers may apply different and sometimes unexpected defaults. It is therefore recommended to add a SameSite attribute with an appropriate value of either ""Strict"", ""Lax"", or ""None"".
+
+http://172.31.0.32:8080/ipocsfb-web/authentication
+
+Cookie was set with:
+Set-Cookie: JSESSIONID=C43E485E80898A1865088DBA26BDAD4C; Path=/ipocsfb-web; HttpOnly
+
+This cookie has the following issues:
+ - Cookie without SameSite attribute.
+When cookies lack the SameSite attribute, Web browsers may apply different and sometimes unexpected defaults. It is therefore recommended to add a SameSite attribute with an appropriate value of either ""Strict"", ""Lax"", or ""None"".","Prevent Cookie information leakage by restricting cookies to first-party or same-site context
+Attacks can extend to Cross-Site-Request-Forgery (CSRF) attacks if there are no additional protections in place (such as Anti-CSRF tokens).
+The SameSite attribute controls how cookies are sent for cross-domain requests.
+The attribute may have three values: 'Lax', 'Strict', or 'None'. If 'None' is used, a website may create a cross-domain POST HTTP request to another website, and the browser automatically adds cookies to this request.
+This may lead to Cross-Site-Request-Forgery (CSRF) attacks if there are no additional protections in place (such as Anti-CSRF tokens).
+Modes and their uses:
+'Lax' mode: the cookie will only be sent with a top-level get request.
+'Strict' mode; the cookie will not be sent with any cross-site usage even if the user follows a link to another website.
+'None' mode: the cookie will be sent with the cross-site requests.
+The attribute having: 'Lax' or 'None' must have 'Secure' Flag set and must be transferred over https.
+Example - Set-Cookie: key=value; SameSite=Lax;Secure
+Setting attribute to 'Strict' is the recommended option.
+Example - Set-Cookie: key=value; SameSite=Strict",http://172.31.0.32:8080/ipocsfb-web/*,"[1] Review possible solutions for configuring SameSite Cookie attribute to recommended values.
+[2] Restrict Cookies to a first-party or same-site context.
+[3] Verify and set the SameSite attribute of your cookie to Strict, to ensure that the cookie will only be sent in a first-party context.
+[4] Or, if you want to relax the restrictions of first-party context, then verify and set the SameSite attribute of the cookie to Lax with Secure Flag enabled and transferred over HTTPS.","http://www.webappsec.org/projects/threat/classes/information_leakage.shtml
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie/SameSite",4.7,CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:L,CWE - 1275
+A02: Cryptographic Failures,Medium,Application error messages,"We found one or more error/warning messages. Application error or warning messages may expose sensitive information about an application's internal workings to an attacker.
+While information disclosure vulnerabilities are not directly exploitable by an attacker, they may help an attacker to learn about system specific information. The following is a list of some of the information an attacker may be able to obtain from application error disclosure.
+Internal IP addresses
+Secrets (passwords, keys, tokens...)
+Operating system distributions
+Software version numbers
+Missing security patches
+Application stack traces
+SQL statements
+Location of sensitive files (backups, temporary files...)
+Location of sensitive resources (databases, caches, code repositories...)
+These messages may also contain the location of the file that produced an unhandled exception.
+Consult the 'Attack details' section for more information about the affected page(s).",Error messages may disclose sensitive information which can be used to escalate attacks.,"http://172.31.0.32:8080/ipocsfb-web/context?_dc=12345'""\'\"");|]*%00{%0d%0a<%00>%bf%27'",Verify that these page(s) are disclosing error or warning messages and properly configure the application to log errors to a file instead of displaying the error to the user.,"https://www.owasp.org/index.php/Improper_Error_Handling
+https://www.php.net/manual/en/errorfunc.configuration.php#ini.display-errors",5.3,CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N,CWE - 209
+A02: Cryptographic Failures,Medium,Unencrypted connection,target was connected to over an unencrypted connection. A potential attacker can intercept and modify data sent and received from this site.,Possible information disclosure.,http://172.31.0.32:8080/ipocsfb-web/*,The site should send and receive data over a secure (HTTPS) connection. atleast Implement self Signed certificate.,https://devopscube.com/create-self-signed-certificates-openssl/,5.4,CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:L/I:L/A:N,CWE - 319
+A04: Insecure Design,Low,Content Security Policy Misconfiguration,"Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks, including Cross Site Scripting (XSS) and data injection attacks.
+An Unsafe Content Security Policy (CSP) Directive in Use
+First observed on: http://172.31.0.32:8080/ipocsfb-web/login
+CSP Value: default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-eval'; img-src 'self' data:; frame-src 'self'; object-src 'none'; connect-src 'self'; form-action 'self'; font-src 'self' data:
+CSP Source: header
+Summary: Acunetix detected that one of following CSP directives is used: unsafe-eval, unsafe-inline. By using unsafe-eval, you allow the use of string evaluation functions like eval. By using unsafe-inline, you allow the execution of inline scripts, which almost defeats the purpose of CSP. When this is allowed, it's very easy to successfully exploit a Cross-site Scripting vulnerability on your website.
+Impact: An attacker can bypass CSP and exploit a Cross-site Scripting vulnerability successfully.
+Remediation: If possible remove unsafe-eval and unsafe-inline from your CSP directives.
+
+Content Security Policy (CSP) can be implemented by adding a Content-Security-Policy header. The value of this header is a string containing the policy directives describing your Content Security Policy. To implement CSP, you should define lists of allowed origins for the all of the types of resources that your site utilizes. For example, if you have a simple site that needs to load scripts, stylesheets, and images hosted locally, as well as from the jQuery library from their CDN, the CSP header could look like the following:
+
+Content-Security-Policy:
+    default-src 'self';
+    script-src 'self' https://code.jquery.com;","CSP can be used to prevent and/or mitigate attacks that involve content/code injection, such as cross-site scripting/XSS attacks, attacks that require embedding a malicious resource, attacks that involve malicious use of iframes, such as clickjacking attacks, and others.",http://172.31.0.32:8080/*,It's recommended to implement Content Security Policy (CSP) into your web application. Configuring Content Security Policy involves adding the Content-Security-Policy HTTP header to a web page and giving it values to control resources the user agent is allowed to load for that page,"https://www.invicti.com/blog/web-security/content-security-policy/
+https://www.invicti.com/blog/web-security/negative-impact-incorrect-csp-implementations/
+https://www.invicti.com/blog/web-security/leverage-browser-security-features-secure-website/",2,CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:N/I:N/A:N,CWE - 1021
+A04: Insecure Design,Low,Permissions-Policy header not implemented,The Permissions-Policy header allows developers to selectively enable and disable use of various browser features and APIs.,The Permissions-Policy header allows a website to specific which features of the web browser should be permitted to function its also help you to limit attack surface area for an attacker.,"
+http://172.31.0.32:8080/*",Implement permission policy header.,"https://www.w3.org/TR/permissions-policy-1/
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Feature-Policy",2,CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:N/I:N/A:N,CWE - 1021
+A06: Vulerable and outdated component,Low,Outdated JavaScript libraries,"You are using an outdated version of one or more JavaScript libraries. A more recent version is available. Although your version was not found to be affected by any security vulnerabilities, it is recommended to keep libraries up to date.
+Ext JS 4.1
+URL: http://172.31.0.32:8080/ipocsfb-web/ext.js
+Detection method: The library's name and version were determined based on the file's contents.
+References:
+https://docs.sencha.com/extjs/",Attacker can exploit knowen cve's for older version.,http://172.31.0.32:8080/ipocsfb-web/ext.js ,Upgrade to the latest version.,NA,2.5,CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:C/C:N/I:N/A:N,CWE - 937
+A04: Insecure Design,Low," Insecure ""OPTIONS"" HTTP Method Enabled",Consultant identified that Multiple vulnerable HTTP option is enabled," It is possible to upload, modify or delete web pages, scripts and files on the web server",http://172.31.0.32:8080/ipocsfb-web/,Disable un-necessary metod that are not in use,http://www.webappsec.org/projects/threat/classes/content_spoofing.shtml,2,CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:N/I:N/A:N,CWE - 74
+A06: Vulerable and outdated component,Medium,Out-of-date Version (Tomcat),Consultant identified you are using an out-of-date version of Tomcat.,"Apache Tomcat Unprotected Transport of Credentials Vulnerability
+When using the RemoteIpFilter with requests received from a reverse proxy via HTTP that include the X-Forwarded-Proto header set to https, session cookies created by Apache Tomcat 11.0.0-M1 to 11.0.0.-M2, 10.1.0-M1 to 10.1.5, 9.0.0-M1 to 9.0.71 and 8.5.0 to 8.5.85 did not include the secure attribute. This could result in the user agent transmitting the session cookie over an insecure channel.",http://172.31.0.32:8080/ipocsfb-web/c:/boot.ini,"Please upgrade your installation of Tomcat to the latest stable version.
+Identified Version
+9.0.69
+Latest Version
+9.0.76 (in this branch)
+Overall Latest Version
+10.1.10
+Vulnerability Database
+Result is based on 06/19/2023 20:30:00 vulnerability database content.",https://tomcat.apache.org/whichversion.html,5.5,CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:L/I:N/A:N,"CWE - 1035, 937"
+A01: Broken Access Control,High,Client-side desync,"The server appears to be vulnerable to client-side desync attacks. A POST request was sent to the path '/ipo-onnet-csfb/polyfills.9a58e423926675bb.js' with a second request sent as the body. The server ignored the Content-Length header and did not close the connection, leading to the smuggled request being interpreted as the next request.","Client-side desync (CSD) vulnerabilities occur when a web server fails to correctly process the Content-Length of POST requests. By exploiting this behavior, an attacker can force a victim's browser to desynchronize its connection with the website",http://172.31.0.32:8080/ipocsfb-web/aes.js,"You can resolve this vulnerability by patching the server so that it either processes POST requests correctly, or closes the connection after handling them. You could also disable connection reuse entirely, but this may reduce performance. You can also resolve this issue by enabling HTTP/2.","https://portswigger.net/web-security/request-smuggling
+https://portswigger.net/research/browser-powered-desync-attacks",8.5,CVSS:3.1/AV:M/AC:L/PR:H/UI:R/S:C/C:M/I:M/A:H,CWE - 444
+A04: Insecure Design,Low,Console Log Debug Information Exposure,"This vulnerability occurs when a web application or software system outputs sensitive debug information to the browser's console log. Debug information typically includes sensitive data such as database queries, API keys, passwords, or other internal system details that should not be exposed to end-users or potential attackers.",The exposure of debug information through the console log can have several negative consequences.,http://172.31.0.32:8080/ipocsfb-web/aes.js,In production environment please diable Console log information.,NA,2,CVSS:3.1/AV:N/AC:I/PR:N/UI:R/S:C/C:N/I:N/A:N,CWE - 489

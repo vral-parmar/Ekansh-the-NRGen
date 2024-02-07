@@ -8,6 +8,9 @@ Install the following before using Ekansh
 ## Ekansh-infra 
 This folder helps in Nessus standard VAPT. 
 
+## Ekansh-infra-D
+this folder used if user is exported .csv with default configuration ie: there is a no column name(CVSS v3, MSKB, Metasploit).
+
 ## Ekansh-web
 This folder helps to generate html files from standard CSV, (Note: You have to generate .csv file manually with the given template) 
 

@@ -1,0 +1,41 @@
+{% include 'header.html' %}
+ 
+  <br><br><br><br>
+  <div class="container mb-3">
+      <div class="row">
+        <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+            <div class="container text-center mt-4">
+              {% with messages = get_flashed_messages()%}
+              {% if messages %}
+                {%for msg in messages %}
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                  <strong>Opps!! </strong>{{msg}}
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor %}
+              {% endif %}
+              {% endwith %}<br>
+            </div>
+            <h3>Upload CSV file exported by Nessus</h3><br>
+          <div class="container">
+            <form method="POST" action="dash" enctype="multipart/form-data">
+              <div class="input-group mb-3">
+                <input type="file" class="form-control" name="file" aria-describedby="inputGroupFileAddon04"
+                  aria-label="Upload" accept=".csv">
+                <input type="submit" value="Submit" class="btn btn-outline-secondary">
+              </div>
+            </form>
+          </div><br>
+          <h3>Whats new?</h3><br>
+          <div class="container">
+            <div class="alert alert-info alert-dismissible fade show" role="alert">
+              Can download excel and html file flawlessly.
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+          <img class="rounded mx-auto d-block img-fluid" src="https://i.ibb.co/Qdw5B1X/Picture1.png" alt="photo is here">
+        </div>
+    </div>
+  </div> 
+  {% include 'footer.html' %}

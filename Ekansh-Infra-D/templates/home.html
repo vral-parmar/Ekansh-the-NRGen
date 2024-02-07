@@ -1,0 +1,45 @@
+{% include 'header.html' %}
+<style >
+  .divider:after,
+  .divider:before {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #eee;
+  }
+  .h-custom {
+  height: calc(100% - 73px);
+  }
+  @media (max-width: 450px) {
+  .h-custom {
+  height: 100%;
+  }
+  }
+  </style>
+<section class="vh-100">
+    <div class="container-fluid h-custom">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-md-9 col-lg-6 col-xl-5">
+          <img src="https://i.ibb.co/Sc5FtfN/MT-Section-No-onboarding-220401-1-1024x727.webp"
+            class="img-fluid" alt="Sample image">
+        </div>
+        <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1"> 
+            <div class="form-outline mb-4">
+              <div class="row">
+                <div class="col">
+                <a type="button" href="{{url_for('registration')}}" class="btn btn-block btn-outline-primary">
+                  Registration
+                  </a>
+                  </div>
+                  <div class="col">
+                    <a type="button" href="{{url_for('login')}}" class="btn btn-block btn-outline-primary">
+                      Login
+                      </a>
+                  </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% include 'footer.html' %}

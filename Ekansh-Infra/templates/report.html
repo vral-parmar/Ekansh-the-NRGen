@@ -95,44 +95,36 @@
 				<thead>
 					<tr align="left">
 						<th style="width:20%">SL: {{loop.index}}</th>
-						<th style="width:80%" colspan="2">Host: {{ value[5] }}</th>
+						<th style="width:80%" colspan="2">Host: {{ value[1] }}</th>
 					</tr>
 					<tr align="left">
 						<th colspan="3">Vulnerability Name: {{ value[0] }}</th>
 					</tr>
 				</thead>
 				<tbody>
-					{% if value[4] == "Critical" %}
+					{% if value[5] == "Critical" %}
 					<tr colspan=3 bgcolor="#ff3300">
-						{% elif value[4] == "High" %}
+						{% elif value[5] == "High" %}
 					<tr colspan=3 bgcolor="#ffcc00">
-						{% elif value[4] == "Medium" %}
+						{% elif value[5] == "Medium" %}
 					<tr colspan=3 bgcolor="#ffff00">
 						{% else %}
 					<tr colspan=3 bgcolor="#33cc33">
 						{% endif %}
-						<td><b>Severity:</b> {{ value[4] }}</td>
-						<td><b>CVSS v2.0 Base:</b> {{ value[2] }}</td>
-						<td><b>CVSS v3.0 Base:</b> {{ value[3] }}</td>
+						<td><b>Severity:</b> {{ value[5] }}</td>
+						<td><b>CVSS v2.0 Base:</b> {{ value[3] }}</td>
+						<td><b>CVSS v3.0 Base:</b> {{ value[4] }}</td>
 					</tr>
-					<!-- <tr>
-						<td><b>CVE</b></td>
-						<td colspan="2">{{ value[1] }}</td>
-					</tr> -->
-					<!-- <tr>
-						<td><b>Port & Protocols</b></td>
-						<td colspan="2">{{ value[6] }} {{ value[7] }}</td>
-					</tr> -->
 					<tr>
-						<td colspan="3" style="max-width: 200px; overflow: hidden; word-wrap: break-word;">
+						<td colspan="3">
 							<b>Vulnerability Description:</b><br>
 							{{ value[9] }}
-							{% if value[14] != ' ' %}
+							{% if value[12] != ' ' %}
 							<br><b>POC:</b><br>
 							<table style="background-color:#c9c8c8; border:2px solid red; border-collapse: collapse; font-style:oblique;">
 								<tr>
 									<td style="border:2px solid red; border-collapse: collapse;">
-										<small>{{ value[14] }}</small>
+										<small>{{ value[12] }}</small>
 									</td>
 								</tr>
 							</table>
@@ -149,16 +141,14 @@
 					</tr>
 					<tr>
 						<td><b>References (CVE-ID, CWE-ID, Bugtag-ID, etc)</b></td>
-						<td colspan="2">{{ value[1] }}<br>{{ value[11] }}</td>
+						<td colspan="2">{{ value[2] }}<br>{{ value[11] }}</td>
 					</tr>
-					{% if value[12] != ' ' %}
+					{% if value[13] != ' ' %}
 					<tr>
-						<td><b>MSKB</b></td>
-						<td colspan="2">{{ value[12] }}</td>
-						<!-- <td><b>Metasploit Exploit:</b> {{ value[13] }}</td> -->
+						<td><b>Missing KB Update</b></td>
+						<td colspan="2">{{ value[13] }}</td>
 					</tr>
 					{% endif %}
-					<tr>
 						<td><b>Closure Remarks</b></td>
 						<td colspan="2"></td>
 					</tr>

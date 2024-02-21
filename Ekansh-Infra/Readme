@@ -1,0 +1,3 @@
+# Ekansh - infra
+
+this will be used if i selected all the option during the .csv export, now ekabsh can merge not only CVE but Host name if multiple IP has same vulnerability Ekansh can merge them in one and show in one row.

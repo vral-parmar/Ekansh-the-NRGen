@@ -17,5 +17,5 @@ six==1.17.0
 SQLAlchemy==2.0.45
 typing_extensions==4.15.0
 tzdata==2025.3
-Werkzeug==3.1.5
+Werkzeug==3.1.9
 WTForms==3.2.1
